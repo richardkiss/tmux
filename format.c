@@ -2167,6 +2167,15 @@ format_cb_pane_left(struct format_tree *ft)
 	return (NULL);
 }
 
+/* Callback for pane_lines_written. */
+static void *
+format_cb_pane_lines_written(struct format_tree *ft)
+{
+	if (ft->wp != NULL)
+		return (format_printf("%u", ft->wp->base.grid->lines_written));
+	return (NULL);
+}
+
 /* Callback for pane_marked. */
 static void *
 format_cb_pane_marked(struct format_tree *ft)
@@ -3310,6 +3319,9 @@ static const struct format_table_entry format_table[] = {
 	},
 	{ "pane_left", FORMAT_TABLE_STRING,
 	  format_cb_pane_left
+	},
+	{ "pane_lines_written", FORMAT_TABLE_STRING,
+	  format_cb_pane_lines_written
 	},
 	{ "pane_marked", FORMAT_TABLE_STRING,
 	  format_cb_pane_marked
