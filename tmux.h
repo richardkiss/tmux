@@ -844,6 +844,8 @@ struct grid {
 	u_int			 hsize;
 	u_int			 hlimit;
 
+	u_int			 lines_written;
+
 	struct grid_line	*linedata;
 };
 

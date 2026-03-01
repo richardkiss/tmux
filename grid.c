@@ -319,6 +319,8 @@ grid_create(u_int sx, u_int sy, u_int hlimit)
 	gd->hsize = 0;
 	gd->hlimit = hlimit;
 
+	gd->lines_written = 0;
+
 	if (gd->sy != 0)
 		gd->linedata = xcalloc(gd->sy, sizeof *gd->linedata);
 	else
@@ -438,6 +440,7 @@ grid_scroll_history(struct grid *gd, u_int bg)
 	grid_empty_line(gd, yy, bg);
 
 	gd->hscrolled++;
+	gd->lines_written++;
 	grid_compact_line(&gd->linedata[gd->hsize]);
 	gd->linedata[gd->hsize].time = current_time;
 	gd->hsize++;
@@ -487,6 +490,7 @@ grid_scroll_history_region(struct grid *gd, u_int upper, u_int lower, u_int bg)
 
 	/* Move the history offset down over the line. */
 	gd->hscrolled++;
+	gd->lines_written++;
 	gd->hsize++;
 }
 
